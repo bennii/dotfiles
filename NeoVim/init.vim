@@ -152,13 +152,16 @@ endfunction
 " }}}
 
 " autocmds {{{
-autocmd BufReadPost *           
-            \ if line("'\"") > 0 && line("'\"") <= line("$") |
-            \   exe "normal! g`\"" |
-            \ endif
+if !exists("autocommands_loaded")
+	let autocommands_loaded = 1
+        autocmd BufReadPost *           
+                \ if line("'\"") > 0 && line("'\"") <= line("$") |
+                \   exe "normal! g`\"" |
+                \ endif
 
-autocmd BufWrite *.py :call DeleteTrailingWS()
-autocmd BufWrite *.coffee :call DeleteTrailingWS()
+        autocmd BufWrite *.py :call DeleteTrailingWS()
+        autocmd BufWrite *.coffee :call DeleteTrailingWS()
+	endif
 " }}}
 
 " Plugins {{{
@@ -174,6 +177,8 @@ Plug 'jacoborus/tender.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'easymotion/vim-easymotion'
+Plug 'othree/html5.vim'
+Plug 'digitaltoad/vim-pug'
 Plug 'Shougo/deoplete.nvim'
 Plug 'Shougo/neoinclude.vim'
 Plug 'zchee/deoplete-jedi'
