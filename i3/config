@@ -157,7 +157,7 @@ mode "$mode_shutdown" {
 bar {
     position top
     separator_symbol "  "
-    font pango: Knack Nerd Font 11
+    font pango: Knack Nerd Font 12
     strip_workspace_numbers yes
     status_command py3status -c /home/benjamin/.config/i3/i3status.conf -n 10 -i /home/benjamin/.config/i3/py3status/modules
 
@@ -175,7 +175,9 @@ bar {
 smart_borders no_gaps
 gaps outer 10
 gaps inner 25
+
 for_window [class="^.*"] border pixel 4
+for_window [class="^Steam$"] floating enable
 
 client.focused              $FFFFFF $1E90FF $FFFFFF $0000FF
 client.unfocused            $FFFFFF $111111 $FFFFFF $0000FF
