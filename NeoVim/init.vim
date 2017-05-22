@@ -233,20 +233,23 @@ endif
 hi! Folded              guifg=#1e90ff   guibg=#191919
 hi! Search              guifg=#000000                   gui=bold
 hi! String              guifg=#40bdff                   gui=italic
+hi! Special             guifg=#1e90ff
 hi! Normal              guifg=#ffffff   guibg=#111111   gui=none
 hi! NonText             guifg=#111111
 hi! ColorColumn                         guibg=#191919
 hi! Pmenu               guifg=#ffffff   guibg=#191919
 hi! PmenuSel            guifg=#000000   guibg=#1e90ff
-hi! PmenuSbar                           guibg=#000000
+hi! PmenuSbar                           guibg=#111111
 hi! PmenuThumb                          guibg=#1e90ff
 hi! PreProc             guifg=#1e90ff
 hi! Repeat              guifg=#1e90ff
+hi! Comment             guifg=#777777
 hi! Keyword             guifg=#1e90ff
+hi! Operator            guifg=#1e90ff
 hi! Exception           guifg=#1e90ff
+hi! Statement           guifg=#ffffff
 hi! Identifier          guifg=#1e90ff
 hi! Conditional         guifg=#1e90ff
-hi! Comment             guifg=#777777
 
 " Plugin colouring adjustments
 hi! EasyMotionTarget    guifg=#1e90ff   guibg=#111111   gui=bold
@@ -258,7 +261,15 @@ hi! jsonBraces          guifg=#1e90ff
 hi! jsonString          guifg=#1e90ff
 hi! jsonKeyword         guifg=#ffffff
 
-" Python specific syntax colouuring
+" Python specific adjustments
 hi! pythonStatement     guifg=#1e90ff
 hi! pythonFunction                                      gui=bold
+
+" Java specific adjustments
+hi! javaParen           guifg=#1e90ff
+hi! javaClassDecl       guifg=#1e90ff
+hi! javaScopeDecl       guifg=#1e90ff
+
+" HTML specific adjustments
+hi! link htmlTagName    Type
 " }}}
