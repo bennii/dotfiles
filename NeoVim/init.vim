@@ -25,6 +25,7 @@ set tabstop=4                   " 1 tab = 4 spaces
 set shiftwidth=4                " 1 tab == 4 spaces
 set wildmenu 				    " Turn on the wild menu
 set wildignore=*.o,*~,*.pyc     " Ignore compiled files
+set signcolumn=yes              " Always show signcolumn
 set spelllang=de_de             " I am german
 set colorcolumn=101             " Enable ColorColumn at Column 101
 set ffs=unix,dos,mac            " Use Unix as the standard file type
@@ -49,18 +50,18 @@ let mapleader=","
 map j gj
 map k gk
 map Q <Nop>
-map <leader>bl :bn<cr>
-map <leader>bh :bp<cr>
-map <leader>bn :new<cr>
-map <leader>bd :Bclose<cr>
-map <leader>ba :1,1000 bd!<cr>
-map <leader>tn :tabnew<cr>
-map <leader>to :tabonly<cr>
-map <leader>tc :tabclose<cr>
-map <leader>tl :tabnext<cr>
-map <leader>th :tabprevious<cr>
-map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
-map <leader>ss :setlocal spell!<cr>
+map <leader>bl :bn<Enter>
+map <leader>bh :bp<Enter>
+map <leader>bn :new<Enter>
+map <leader>bd :Bclose<Enter>
+map <leader>ba :1,1000 bd!<Enter>
+map <leader>tn :tabnew<Enter>
+map <leader>to :tabonly<Enter>
+map <leader>tc :tabclose<Enter>
+map <leader>tl :tabnext<Enter>
+map <leader>th :tabprevious<Enter>
+map <leader>te :tabedit <c-r>=expand("%:p:h")<Enter>
+map <leader>ss :setlocal spell!<Enter>
 
 noremap ds{ F{xf}x
 noremap cs{ F{xf}xi
@@ -72,6 +73,8 @@ noremap ds( F(xf)x
 noremap cs( F(xf)xi
 noremap ds) F(xf)x
 noremap cs) F(xf)xi
+nnoremap <space> /
+nnoremap <c-space> ?
 nnoremap <down> ddp
 nnoremap <up> ddkP
 nnoremap <left> <Nop>
@@ -85,16 +88,19 @@ nnoremap <S-j> :resize +5<Enter>
 nnoremap <S-k> :resize -5<Enter>
 nnoremap <S-l> :vertical resize +5<Enter>
 nnoremap <S-h> :vertical resize -5<Enter>
-nnoremap <leader>w :w!<cr>
+nnoremap <leader>w :update<Enter>
 nnoremap <leader>Hex :%!xxd<Enter>
 nnoremap <leader>hex :%!xxd -r<Enter>
-nnoremap <F8> :TagbarToggle<Enter>
-nnoremap <F12> :vnew $MYVIMRC<Enter>
+nnoremap <leader>cl :set cursorline! cursorline?<Enter>
 nnoremap <C-n> :NERDTreeToggle<Enter>
 nnoremap <C-w> :set wrap! wrap?<Enter>
 nnoremap <C-i> :IndentLinesToggle<Enter>
 nnoremap <Leader><Enter> :nohl<Enter>
-nnoremap <Leader>cl :set cursorline! cursorline?<Enter>
+nnoremap <F8> :TagbarToggle<Enter>
+nnoremap <F12> :vnew $MYVIMRC<Enter>
+nnoremap <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 vnoremap <up> <Nop>
 vnoremap <down> <Nop>
@@ -104,17 +110,6 @@ vnoremap <silent> * :call VisualSelection('f')<Enter>
 vnoremap <silent> # :call VisualSelection('b')<Enter>
 vnoremap <silent> <leader>r :call VisualSelection('replace')<Enter>
 "}}}
-
-" Adjust colorscheme {{{
-hi Folded               guifg=#1e90ff   guibg=#191919
-hi Search               guifg=#000000                   gui=bold
-hi Normal               guifg=#CCCCCC   guibg=#111111   gui=none
-hi NonText              guifg=#111111
-hi ColorColumn                          guibg=#191919
-hi EasyMotionTarget     guifg=#204adf   guibg=#111111   gui=bold
-hi ALEErrorSign         guifg=#ff1a1a   guibg=NONE
-hi ALEWarningSign       guifg=#fcfc4b   guibg=NONE
-" }}}
 
 " Useful functions that I found online. I do not have the sources. {{{
 function! CmdLine(str)
@@ -151,39 +146,31 @@ function! VisualSelection(direction) range
 endfunction
 " }}}
 
-" autocmds {{{
-if !exists("autocommands_loaded")
-	let autocommands_loaded = 1
-        autocmd BufReadPost *           
-                \ if line("'\"") > 0 && line("'\"") <= line("$") |
-                \   exe "normal! g`\"" |
-                \ endif
-
-        autocmd BufWrite *.py :call DeleteTrailingWS()
-        autocmd BufWrite *.coffee :call DeleteTrailingWS()
-	endif
-" }}}
-
 " Plugins {{{
 call plug#begin('~/.config/nvim/plug')
+" Colorschemes
+Plug 'jacoborus/tender.vim'
+
 Plug 'w0rp/ale'
 Plug 'kien/ctrlp.vim'
 Plug 'majutsushi/tagbar'
+Plug 'scrooloose/nerdtree'
+Plug 'Yggdroot/indentLine'
+Plug 'itchyny/lightline.vim'
+Plug 'digitaltoad/vim-pug'
 Plug 'mhinz/vim-startify'
 Plug 'tpope/vim-fugitive'
-Plug 'Yggdroot/indentLine'
-Plug 'scrooloose/nerdtree'
-Plug 'jacoborus/tender.vim'
-Plug 'itchyny/lightline.vim'
+Plug 'airblade/vim-gitgutter'
 Plug 'ryanoasis/vim-devicons'
 Plug 'easymotion/vim-easymotion'
-Plug 'othree/html5.vim'
-Plug 'digitaltoad/vim-pug'
+
+" Autocompletion
 Plug 'Shougo/deoplete.nvim'
 Plug 'Shougo/neoinclude.vim'
 Plug 'zchee/deoplete-jedi'
 Plug 'zchee/deoplete-clang'
 Plug 'carlitux/deoplete-ternjs'
+Plug 'artur-shaik/vim-javacomplete2'
 call plug#end()
 " }}}
 
@@ -222,4 +209,56 @@ let g:lightline = {
 
 " indentLine settings
 let g:indentLine_char = '┊'
+
+" javacomplete2 settings
+let g:JavaComplete_ClosingBrace = 1
+autocmd FileType java setlocal omnifunc=javacomplete#Complete
+
+" }}}
+
+" autocmds/augroups {{{
+if !exists("autocommands_loaded")
+	let autocommands_loaded = 1
+        autocmd BufReadPost *           
+                \ if line("'\"") > 0 && line("'\"") <= line("$") |
+                \   exe "normal! g`\"" |
+                \ endif
+
+        autocmd BufWrite *.py :call DeleteTrailingWS()
+        autocmd BufWrite *.coffee :call DeleteTrailingWS()
+endif
+" }}}
+
+" Adjust colourscheme {{{
+hi! Folded              guifg=#1e90ff   guibg=#191919
+hi! Search              guifg=#000000                   gui=bold
+hi! String              guifg=#40bdff                   gui=italic
+hi! Normal              guifg=#ffffff   guibg=#111111   gui=none
+hi! NonText             guifg=#111111
+hi! ColorColumn                         guibg=#191919
+hi! Pmenu               guifg=#ffffff   guibg=#191919
+hi! PmenuSel            guifg=#000000   guibg=#1e90ff
+hi! PmenuSbar                           guibg=#000000
+hi! PmenuThumb                          guibg=#1e90ff
+hi! PreProc             guifg=#1e90ff
+hi! Repeat              guifg=#1e90ff
+hi! Keyword             guifg=#1e90ff
+hi! Exception           guifg=#1e90ff
+hi! Identifier          guifg=#1e90ff
+hi! Conditional         guifg=#1e90ff
+hi! Comment             guifg=#777777
+
+" Plugin colouring adjustments
+hi! EasyMotionTarget    guifg=#1e90ff   guibg=#111111   gui=bold
+hi! ALEErrorSign        guifg=#ff1a1a   guibg=NONE
+hi! ALEWarningSign      guifg=#fcfc4b   guibg=NONE
+
+" JSON specific adjustments
+hi! jsonBraces          guifg=#1e90ff
+hi! jsonString          guifg=#1e90ff
+hi! jsonKeyword         guifg=#ffffff
+
+" Python specific syntax colouuring
+hi! pythonStatement     guifg=#1e90ff
+hi! pythonFunction                                      gui=bold
 " }}}
