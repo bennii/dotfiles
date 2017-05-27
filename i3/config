@@ -10,8 +10,9 @@ set $ws5 5:  
 set $ws6 6:    
 set $ws7 7:    
 set $ws8 8:    
-set $ws9 9:
-set $ws0 10:    
+set $ws9 9:    
+set $ws0 10:    
+
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
