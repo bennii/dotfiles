@@ -160,6 +160,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'digitaltoad/vim-pug'
 Plug 'mhinz/vim-startify'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-commentary'
 Plug 'airblade/vim-gitgutter'
 Plug 'ryanoasis/vim-devicons'
 Plug 'easymotion/vim-easymotion'
@@ -236,7 +237,9 @@ hi! String              guifg=#40bdff                   gui=italic
 hi! Special             guifg=#1e90ff
 hi! Normal              guifg=#ffffff   guibg=#111111   gui=none
 hi! NonText             guifg=#111111
+hi! VertSplit           guifg=#666666
 hi! ColorColumn                         guibg=#191919
+hi! SignColumn                          guibg=#111111
 hi! Pmenu               guifg=#ffffff   guibg=#191919
 hi! PmenuSel            guifg=#000000   guibg=#1e90ff
 hi! PmenuSbar                           guibg=#111111
@@ -260,6 +263,12 @@ hi! ALEWarningSign      guifg=#fcfc4b   guibg=NONE
 hi! jsonBraces          guifg=#1e90ff
 hi! jsonString          guifg=#1e90ff
 hi! jsonKeyword         guifg=#ffffff
+
+" C/C++ specific adjustments
+hi! cType               guifg=#1e90ff
+hi! cppType               guifg=#1e90ff
+hi! cppAccess           guifg=#1e90ff
+hi! cppStructure        guifg=#1e90ff
 
 " Python specific adjustments
 hi! pythonStatement     guifg=#1e90ff
