@@ -4,13 +4,14 @@ set number                      " Enable line numbers
 set relativenumber              " Enable relative line numbers
 set nowrap
 set autoread 				    " Set to auto read when a file is changed from the outside
-set noshowmode
 set lazyredraw
 set termguicolors               " Enable GUI colors in Terminal. Requires terminal with true colors enabled
 set autoindent                  " Enable auto indentation
 set smartindent                 " Indent smart
 set smarttab
 set incsearch  				    " Makes search act like search in modern browsers
+set ignorecase                  " Ignore case matching during search (has to be on for smartcase)
+set smartcase                   " But if there is a search with upper case, search for upper cases
 set mat=1 					    " How many tenths of a second to blink when matching brackets
 set showmatch 				    " Show matching brackets when text indicator is over them
 set noshowmode 				    " Hide default mode indicator
@@ -237,7 +238,7 @@ hi! String              guifg=#40bdff                   gui=italic
 hi! Special             guifg=#1e90ff
 hi! Normal              guifg=#ffffff   guibg=#111111   gui=none
 hi! NonText             guifg=#111111
-hi! VertSplit           guifg=#666666
+hi! VertSplit           guifg=#666666   guibg=#111111
 hi! ColorColumn                         guibg=#191919
 hi! SignColumn                          guibg=#111111
 hi! Pmenu               guifg=#ffffff   guibg=#191919
