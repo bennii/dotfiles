@@ -110,6 +110,8 @@ vnoremap <right> <Nop>
 vnoremap <silent> * :call VisualSelection('f')<Enter>
 vnoremap <silent> # :call VisualSelection('b')<Enter>
 vnoremap <silent> <leader>r :call VisualSelection('replace')<Enter>
+
+tnoremap <Esc> <C-\><C-n>
 "}}}
 
 " Useful functions that I found online. I do not have the sources. {{{
@@ -149,22 +151,31 @@ endfunction
 
 " Plugins {{{
 call plug#begin('~/.config/nvim/plug')
-" Colorschemes
-Plug 'jacoborus/tender.vim'
-
-Plug 'w0rp/ale'
-Plug 'kien/ctrlp.vim'
-Plug 'majutsushi/tagbar'
-Plug 'scrooloose/nerdtree'
-Plug 'Yggdroot/indentLine'
-Plug 'itchyny/lightline.vim'
-Plug 'digitaltoad/vim-pug'
+" Colorschemes and eye candy
 Plug 'mhinz/vim-startify'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-commentary'
-Plug 'airblade/vim-gitgutter'
+Plug 'Yggdroot/indentLine'
+Plug 'digitaltoad/vim-pug'
+Plug 'jacoborus/tender.vim'
+Plug 'itchyny/lightline.vim'
 Plug 'ryanoasis/vim-devicons'
+
+" File management
+Plug 'kien/ctrlp.vim'
+Plug 'scrooloose/nerdtree'
+
+" Text and code helper
+Plug 'w0rp/ale'
+Plug 'majutsushi/tagbar'
+Plug 'tpope/vim-commentary'
 Plug 'easymotion/vim-easymotion'
+
+" cvs tools
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+
+" Snippets
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 
 " Autocompletion
 Plug 'Shougo/deoplete.nvim'
@@ -216,8 +227,6 @@ let g:indentLine_char = '┊'
 let g:JavaComplete_ClosingBrace = 1
 autocmd FileType java setlocal omnifunc=javacomplete#Complete
 
-" }}}
-
 " autocmds/augroups {{{
 if !exists("autocommands_loaded")
 	let autocommands_loaded = 1
@@ -245,6 +254,7 @@ hi! Pmenu               guifg=#ffffff   guibg=#191919
 hi! PmenuSel            guifg=#000000   guibg=#1e90ff
 hi! PmenuSbar                           guibg=#111111
 hi! PmenuThumb                          guibg=#1e90ff
+hi! MatchParen          guifg=#000000   guibg=#bfff00   gui=bold
 hi! PreProc             guifg=#1e90ff
 hi! Repeat              guifg=#1e90ff
 hi! Comment             guifg=#777777
@@ -267,7 +277,7 @@ hi! jsonKeyword         guifg=#ffffff
 
 " C/C++ specific adjustments
 hi! cType               guifg=#1e90ff
-hi! cppType               guifg=#1e90ff
+hi! cppType             guifg=#1e90ff
 hi! cppAccess           guifg=#1e90ff
 hi! cppStructure        guifg=#1e90ff
 
@@ -279,6 +289,16 @@ hi! pythonFunction                                      gui=bold
 hi! javaParen           guifg=#1e90ff
 hi! javaClassDecl       guifg=#1e90ff
 hi! javaScopeDecl       guifg=#1e90ff
+
+" Bash specific adjustments
+hi! shRange             guifg=#ffffff
+hi! shFunctionTwo                                       gui=bold
+hi! shFunctionKey                                       gui=bold
+hi! shFunction                                          gui=bold
+
+" Vim specific adjustments
+hi! vimGroup            guifg=#1e90ff
+hi! vimHiGroup          guifg=#1e90ff
 
 " HTML specific adjustments
 hi! link htmlTagName    Type
