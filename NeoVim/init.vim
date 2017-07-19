@@ -75,6 +75,8 @@ noremap cs( F(xf)xi
 noremap ds) F(xf)x
 noremap cs) F(xf)xi
 nnoremap <space> /
+nnoremap j jzz
+nnoremap k kzz
 nnoremap <c-space> ?
 nnoremap <down> ddp
 nnoremap <up> ddkP
@@ -94,7 +96,6 @@ nnoremap <leader>Hex :%!xxd<Enter>
 nnoremap <leader>hex :%!xxd -r<Enter>
 nnoremap <leader>cl :set cursorline! cursorline?<Enter>
 nnoremap <C-n> :NERDTreeToggle<Enter>
-nnoremap <C-w> :set wrap! wrap?<Enter>
 nnoremap <C-i> :IndentLinesToggle<Enter>
 nnoremap <Leader><Enter> :nohl<Enter>
 nnoremap <F8> :TagbarToggle<Enter>
@@ -226,6 +227,7 @@ let g:indentLine_char = '┊'
 " javacomplete2 settings
 let g:JavaComplete_ClosingBrace = 1
 autocmd FileType java setlocal omnifunc=javacomplete#Complete
+" }}} 
 
 " autocmds/augroups {{{
 if !exists("autocommands_loaded")
