@@ -28,7 +28,7 @@ set wildmenu 				    " Turn on the wild menu
 set wildignore=*.o,*~,*.pyc     " Ignore compiled files
 set signcolumn=yes              " Always show signcolumn
 set spelllang=de_de             " I am german
-set colorcolumn=101             " Enable ColorColumn at Column 101
+set colorcolumn=0               " Disable colorcolumn
 set ffs=unix,dos,mac            " Use Unix as the standard file type
 set whichwrap+=<,>,h,l          " Additional keys to move between lines
 set fillchars=vert:\│           " Better looking UTF characters
@@ -95,6 +95,8 @@ nnoremap <leader>w :update<Enter>
 nnoremap <leader>Hex :%!xxd<Enter>
 nnoremap <leader>hex :%!xxd -r<Enter>
 nnoremap <leader>cl :set cursorline! cursorline?<Enter>
+nnoremap <C-m>m :make<Enter>
+nnoremap <C-m>c :make clean<Enter>
 nnoremap <C-n> :NERDTreeToggle<Enter>
 nnoremap <C-i> :IndentLinesToggle<Enter>
 nnoremap <Leader><Enter> :nohl<Enter>
@@ -162,6 +164,7 @@ Plug 'ryanoasis/vim-devicons'
 
 " File management
 Plug 'kien/ctrlp.vim'
+Plug 'vim-scripts/a.vim'
 Plug 'scrooloose/nerdtree'
 
 " Text and code helper
@@ -184,14 +187,14 @@ Plug 'Shougo/neoinclude.vim'
 Plug 'zchee/deoplete-jedi'
 Plug 'zchee/deoplete-clang'
 Plug 'carlitux/deoplete-ternjs'
-Plug 'artur-shaik/vim-javacomplete2'
+Plug 'tweekmonster/deoplete-clang2'
 call plug#end()
 " }}}
 
 " Plugin settings {{{
 " deoplete settings
 let g:deoplete#enable_at_startup = 1
-let g:deoplete#sources#clang#clang_header = "/usr/lib/clang/4.0.1/include/"
+let g:deoplete#sources#clang#clang_header = "/usr/lib/clang"
 let g:deoplete#sources#clang#libclang_path = "/usr/lib/libclang.so"
 
 " Tagbar settings
