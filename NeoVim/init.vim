@@ -56,13 +56,14 @@ map <leader>bh :bp<Enter>
 map <leader>bn :new<Enter>
 map <leader>bd :Bclose<Enter>
 map <leader>ba :1,1000 bd!<Enter>
-map <leader>tn :tabnew<Enter>
-map <leader>to :tabonly<Enter>
-map <leader>tc :tabclose<Enter>
-map <leader>tl :tabnext<Enter>
-map <leader>th :tabprevious<Enter>
-map <leader>te :tabedit <c-r>=expand("%:p:h")<Enter>
 map <leader>ss :setlocal spell!<Enter>
+
+map <M-n> :tabnew<Enter>
+map <M-o> :tabonly<Enter>
+map <M-c> :tabclose<Enter>
+map <M-right> :tabnext<Enter>
+map <M-left> :tabprevious<Enter>
+map <M-e> :tabedit <c-r>=expand("%:p:h")<Enter>
 
 noremap ds{ F{xf}x
 noremap cs{ F{xf}xi
@@ -168,7 +169,7 @@ Plug 'vim-scripts/a.vim'
 Plug 'scrooloose/nerdtree'
 
 " Text and code helper
-Plug 'w0rp/ale'
+"Plug 'w0rp/ale'
 Plug 'majutsushi/tagbar'
 Plug 'tpope/vim-commentary'
 Plug 'easymotion/vim-easymotion'
