@@ -1,43 +1,38 @@
 set $mod Mod1
-set $Locker i3lock-fancy
-set $Terminal st
-set $Browser google-chrome-stable
-set $ws1 1:    
-set $ws2 2:    
-set $ws3 3:    
-set $ws4 4:    
-set $ws5 5:    
-set $ws6 6:    
-set $ws7 7:    
-set $ws8 8:    
-set $ws9 9:    
-set $ws0 10:    
-
+set $Locker ./Scripts/lock.sh && sleep 1
+# set $browser firefox
+set $browser google-chrome-stable
+set $ws1 1:      
+set $ws2 2:      
+set $ws3 3:      
+set $ws4 4:      
+set $ws5 5:      
+set $ws6 6:      
+set $ws7 7:      
+set $ws8 8:
+set $ws9 9:
+set $ws0 10:      
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
 # Function keys
-bindsym XF86MonBrightnessUp exec xbacklight -inc 10
-bindsym XF86MonBrightnessDown exec xbacklight -dec 10
-bindsym XF86AudioMute exec pactl set-sink-mute 2 toggle
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 2 +5%
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume 2 -5%
+bindsym XF86AudioMute exec amixer set Master mute
+bindsym XF86AudioRaiseVolume exec amixer set Master 5+ unmute
+bindsym XF86AudioLowerVolume exec amixer set Master 5- unmute
+bindsym $mod+Return exec --no-startup-id st -e /usr/bin/fish
 
 # custom program bindings
-bindsym $mod+b exec $Browser
-bindsym $mod+e exec $Terminal nvim
-bindsym $mod+z exec zathura
-bindsym $mod+w exec $Terminal weechat
-bindsym $mod+d exec dmenu_run
-#bindsym $mod+d exec rofi -show run -lines 7 -width 33 -padding 30 -bw 0
-bindsym $mod+m exec $Terminal mc
-bindsym $mod+Return exec $Terminal -e /usr/bin/fish
-bindsym $mod+Shift+q kill
+bindsym $mod+b exec --no-startup-id $browser
+bindsym $mod+t exec st -e nctelegram
+bindsym $mod+e exec st -e nvim
 
-bindsym $mod+r mode "resize"
-bindsym $mod+p mode "$mode_shutdown"
-bindsym $mod+Shift+g mode "$mode_gaps"
+bindsym $mod+p mode "$mode_system"
+
+bindsym $mod+Shift+q kill
+bindsym $mod+d exec rofi -show run -lines 7 -width 33 -padding 30 -bw 0
+
+bindsym $mod+Shift+t exec sh Scripts/toggleTouchpad.sh
 
 # change focus
 bindsym $mod+h focus left
@@ -54,9 +49,20 @@ bindsym $mod+Shift+l move right
 bindsym $mod+g split h
 bindsym $mod+v split v
 
+# enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
+
+# toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+#bindsym $mod+a focus parent
+
+# focus the child container
+#bindsym $mod+d focus child
 
 bindsym $mod+1 workspace $ws1
 bindsym $mod+2 workspace $ws2
@@ -82,19 +88,20 @@ bindsym $mod+Shift+0 move container to workspace $ws0
 
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
+
+# exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec i3-msg exit
 
-set $mode_gaps i) inner gaps, o) outer gaps
+set $mode_gaps gaps
 set $mode_gaps_outer outer gaps
 set $mode_gaps_inner inner gaps
-set $mode_shutdown System (Shift + ) (l) lock (s) suspend, (r) reboot, (p) poweroff
-
+bindsym $mod+Shift+g mode "$mode_gaps"
 mode "$mode_gaps" {
     bindsym o      mode "$mode_gaps_outer"
     bindsym i      mode "$mode_gaps_inner"
 
-    bindsym 0      mode "default", exec i3-msg "gaps inner current set 0" && i3-msg "gaps outer current set 0"
-    bindsym d      mode "default", exec i3-msg "gaps inner current set $default_gaps_inner" && i3-msg "gaps outer current set $default_gaps_outer"
+    bindsym 0      mode "default", exec --no-startup-id i3-msg "gaps inner current set 0" && i3-msg "gaps outer current set 0"
+    bindsym d      mode "default", exec --no-startup-id i3-msg "gaps inner current set $default_gaps_inner" && i3-msg "gaps outer current set $default_gaps_outer"
 
     bindsym Return mode "default"
     bindsym Escape mode "default"
@@ -146,7 +153,9 @@ mode "resize" {
 }
 
 
-mode "$mode_shutdown" {
+set $mode_system System (Shift + ) (l) lock (s) suspend, (r) reboot, (p) poweroff
+
+mode "$mode_system" {
     bindsym Shift+l exec --no-startup-id $Locker, mode "default"
     bindsym Shift+r exec --no-startup-id systemctl reboot, mode "default"
     bindsym Shift+s exec --no-startup-id systemctl suspend, mode "default"
@@ -156,32 +165,35 @@ mode "$mode_shutdown" {
     bindsym Escape mode "default"
 }
 
+bindsym $mod+r mode "resize"
 
 bar {
     position top
     separator_symbol "  "
-    font pango: Knack Nerd Font 12
+    font pango: Hack 12
     strip_workspace_numbers yes
-    status_command py3status -c /home/benjamin/.config/i3/i3status.conf -n 10 -i /home/benjamin/.config/i3/py3status/modules
+    status_command py3status -c ~/.i3/i3status.conf -n 10 -i ~/.i3/py3status/modules
 
     colors {
         background 	$111111
         separator   $FFFFFF
         statusline  $1E90FF 
 
-        urgent_workspace    $1E90FF $1E90FF  $FFFFFF
+        urgent_workspace    $1E90FF $1E90FF  $0000FF
         focused_workspace   $1E90FF $1E90FF  $FFFFFF
         inactive_workspace  $111111 $111111  $888888
     }
 }
 
+smart_gaps on
 smart_borders no_gaps
-gaps outer 10
-gaps inner 25
-
-for_window [class="^.*"] border pixel 2
-for_window [class="^Steam$"] floating enable
+gaps outer 5
+gaps inner 20
+for_window [class="^.*"] border pixel 3
 
 client.focused              $FFFFFF $1E90FF $FFFFFF $0000FF
 client.unfocused            $FFFFFF $111111 $FFFFFF $0000FF
 client.focused_inactive     $FFFFFF $111111 $FFFFFF $0000FF
+
+
+exec --no-startup-id redshift
