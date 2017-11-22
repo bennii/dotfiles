@@ -179,16 +179,23 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
 " Snippets
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
+" Plug 'SirVer/ultisnips'
+" Plug 'honza/vim-snippets'
+
+" Old autocompletion tools 
+" Plug 'Shougo/deoplete.nvim'
+" Plug 'Shougo/neoinclude.vim'
+" Plug 'zchee/deoplete-jedi'
+" Plug 'zchee/deoplete-clang'
+" Plug 'carlitux/deoplete-ternjs'
+" Plug 'tweekmonster/deoplete-clang2'
 
 " Autocompletion
-Plug 'Shougo/deoplete.nvim'
+Plug 'roxma/nvim-completion-manager'
+Plug 'roxma/ncm-clang'
+Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
 Plug 'Shougo/neoinclude.vim'
-Plug 'zchee/deoplete-jedi'
-Plug 'zchee/deoplete-clang'
-Plug 'carlitux/deoplete-ternjs'
-Plug 'tweekmonster/deoplete-clang2'
+Plug 'calebeby/ncm-css'
 call plug#end()
 " }}}
 
