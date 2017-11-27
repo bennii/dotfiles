@@ -191,19 +191,20 @@ Plug 'airblade/vim-gitgutter'
 " Plug 'tweekmonster/deoplete-clang2'
 
 " Autocompletion
-Plug 'roxma/nvim-completion-manager'
-Plug 'roxma/ncm-clang'
-Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
-Plug 'Shougo/neoinclude.vim'
-Plug 'calebeby/ncm-css'
+" Plug 'roxma/nvim-completion-manager'
+" Plug 'roxma/ncm-clang'
+" Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
+" Plug 'Shougo/neoinclude.vim'
+" Plug 'calebeby/ncm-css'
+Plug 'Valloric/YouCompleteMe'
 call plug#end()
 " }}}
 
 " Plugin settings {{{
-" deoplete settings OBSOLETE
-" let g:deoplete#enable_at_startup = 1
-" let g:deoplete#sources#clang#clang_header = "/usr/lib/clang"
-" let g:deoplete#sources#clang#libclang_path = "/usr/lib/libclang.so"
+" deoplete settings
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#sources#clang#clang_header = "/usr/lib/clang"
+let g:deoplete#sources#clang#libclang_path = "/usr/lib/libclang.so"
 
 " Tagbar settings
 let g:tagbar_sort = 1
@@ -235,9 +236,9 @@ let g:lightline = {
 " indentLine settings
 let g:indentLine_char = '┊'
 
-" javacomplete2 settings OBSOLETE
-" let g:JavaComplete_ClosingBrace = 1
-" autocmd FileType java setlocal omnifunc=javacomplete#Complete
+" javacomplete2 settings 
+let g:JavaComplete_ClosingBrace = 1
+autocmd FileType java setlocal omnifunc=javacomplete#Complete
 " }}} 
 
 " autocmds/augroups {{{
@@ -315,4 +316,7 @@ hi! vimHiGroup          guifg=#1e90ff
 
 " HTML specific adjustments
 hi! link htmlTagName    Type
+
+" JavaScript specific adjustments
+hi! link javaScriptStatement javaScriptOperator
 " }}}
