@@ -169,33 +169,18 @@ Plug 'vim-scripts/a.vim'
 Plug 'scrooloose/nerdtree'
 
 " Text and code helper
-"Plug 'w0rp/ale'
 Plug 'majutsushi/tagbar'
 Plug 'tpope/vim-commentary'
 Plug 'easymotion/vim-easymotion'
 
-" cvs tools
+" CVS tools
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
-" Snippets
-" Plug 'SirVer/ultisnips'
-" Plug 'honza/vim-snippets'
+" Syntax files
+Plug 'wavded/vim-stylus'
 
-" Old autocompletion tools 
-" Plug 'Shougo/deoplete.nvim'
-" Plug 'Shougo/neoinclude.vim'
-" Plug 'zchee/deoplete-jedi'
-" Plug 'zchee/deoplete-clang'
-" Plug 'carlitux/deoplete-ternjs'
-" Plug 'tweekmonster/deoplete-clang2'
-
-" Autocompletion
-" Plug 'roxma/nvim-completion-manager'
-" Plug 'roxma/ncm-clang'
-" Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
-" Plug 'Shougo/neoinclude.vim'
-" Plug 'calebeby/ncm-css'
+" Autocompletion 
 Plug 'Valloric/YouCompleteMe'
 call plug#end()
 " }}}
