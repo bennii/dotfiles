@@ -1,0 +1,42 @@
+xterm*font:         terminus-12
+xterm*foreground: 	rgb:ff/ff/ff
+xterm*background: 	rgb:11/11/11
+
+Xft.dpi:            96
+Xft.rgba:       	rgb
+Xft.antialias:  	1
+Xft.hinting:    	1
+Xft.lcdfilter:      lcddefault
+Xft.hintstyle:  	hintslight
+
+! black
+*.color0:           #1c1c1c
+*.color8:           #1c1c1c
+
+! red
+*.color1:           #ff0000
+*.color9:           #aa0000
+
+! green
+*.color2:           #1e90ff
+*.color10:          #00ff00
+
+! yellow
+*.color3:           #ffff00
+*.color11:          #ffff00
+
+! blue
+*.color4:           #0092ff
+*.color12:          #1e90ff
+
+! magenta
+*.color5:           #1e90ff
+*.color13:          #1e90ff
+
+! cyan
+*.color6:           #1e90ff
+*.color14:          #1e90ff
+
+! white
+*.color7:           #ffffff
+*.color15:          #ffffff
