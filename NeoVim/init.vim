@@ -1,4 +1,5 @@
 " Settings {{{
+set hidden                      " Allow buffers to be hidden after a modification
 set magic 					    " For regular expressions turn magic on
 set number                      " Enable line numbers
 set relativenumber              " Enable relative line numbers
@@ -51,19 +52,19 @@ let mapleader=","
 map j gj
 map k gk
 map Q <Nop>
-map <leader>bl :bn<Enter>
-map <leader>bh :bp<Enter>
-map <leader>bn :new<Enter>
-map <leader>bd :Bclose<Enter>
-map <leader>ba :1,1000 bd!<Enter>
+map <M-right> :bn<Enter>
+map <M-left> :bp<Enter>
+map <M-n>bn :new<Enter>
+map <M-c>bd :Bclose<Enter>
+map <M-a>ba :1,1000 bd!<Enter>
 map <leader>ss :setlocal spell!<Enter>
 
-map <M-n> :tabnew<Enter>
-map <M-o> :tabonly<Enter>
-map <M-c> :tabclose<Enter>
-map <M-right> :tabnext<Enter>
-map <M-left> :tabprevious<Enter>
-map <M-e> :tabedit <c-r>=expand("%:p:h")<Enter>
+"map <M-n> :tabnew<Enter>
+"map <M-o> :tabonly<Enter>
+"map <M-c> :tabclose<Enter>
+"map <M-right> :tabnext<Enter>
+"map <M-left> :tabprevious<Enter>
+"map <M-e> :tabedit <c-r>=expand("%:p:h")<Enter>
 
 noremap ds{ F{xf}x
 noremap cs{ F{xf}xi
@@ -155,13 +156,16 @@ endfunction
 
 " Plugins {{{
 call plug#begin('~/.config/nvim/plug')
-" Colorschemes and eye candy
+" Eye candy
 Plug 'mhinz/vim-startify'
 Plug 'Yggdroot/indentLine'
-Plug 'digitaltoad/vim-pug'
-Plug 'jacoborus/tender.vim'
-Plug 'itchyny/lightline.vim'
 Plug 'ryanoasis/vim-devicons'
+Plug 'itchyny/lightline.vim'
+
+" Colorschemes
+Plug 'sjl/badwolf'
+Plug 'morhetz/gruvbox'
+Plug 'jacoborus/tender.vim'
 
 " File management
 Plug 'kien/ctrlp.vim'
@@ -179,17 +183,16 @@ Plug 'airblade/vim-gitgutter'
 
 " Syntax files
 Plug 'wavded/vim-stylus'
+Plug 'digitaltoad/vim-pug'
+Plug 'jelera/vim-javascript-syntax'
 
 " Autocompletion 
 Plug 'Valloric/YouCompleteMe'
+Plug 'artur-shaik/vim-javacomplete2'
 call plug#end()
 " }}}
 
 " Plugin settings {{{
-" deoplete settings
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#sources#clang#clang_header = "/usr/lib/clang"
-let g:deoplete#sources#clang#libclang_path = "/usr/lib/libclang.so"
 
 " Tagbar settings
 let g:tagbar_sort = 1
@@ -241,7 +244,7 @@ endif
 
 " Adjust colourscheme {{{
 hi! Folded              guifg=#1e90ff   guibg=#191919
-hi! Search              guifg=#000000                   gui=bold
+hi! Search              guifg=#000000   guibg=#05c50b   gui=bold
 hi! String              guifg=#40bdff                   gui=italic
 hi! Special             guifg=#1e90ff
 hi! Normal              guifg=#ffffff   guibg=#111111   gui=none
@@ -253,7 +256,7 @@ hi! Pmenu               guifg=#ffffff   guibg=#191919
 hi! PmenuSel            guifg=#000000   guibg=#1e90ff
 hi! PmenuSbar                           guibg=#111111
 hi! PmenuThumb                          guibg=#1e90ff
-hi! MatchParen          guifg=#000000   guibg=#bfff00   gui=bold
+hi! MatchParen          guifg=#000000   guibg=#05c50b   gui=bold
 hi! PreProc             guifg=#1e90ff
 hi! Repeat              guifg=#1e90ff
 hi! Comment             guifg=#777777
