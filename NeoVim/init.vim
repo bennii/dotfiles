@@ -1,3 +1,16 @@
+" autocmds/augroups {{{
+if !exists("autocommands_loaded")
+	let autocommands_loaded = 1
+        autocmd BufReadPost *           
+                \ if line("'\"") > 0 && line("'\"") <= line("$") |
+                \   exe "normal! g`\"" |
+                \ endif
+
+        autocmd BufWrite *.py :call DeleteTrailingWS()
+        autocmd BufWrite *.coffee :call DeleteTrailingWS()
+endif
+" }}}
+
 " Settings {{{
 set hidden                      " Allow buffers to be hidden after a modification
 set magic 					    " For regular expressions turn magic on
@@ -41,7 +54,7 @@ set backspace=eol,start,indent  " Configure backspace so it acts as it should ac
 syntax enable
 filetype plugin on
 filetype indent on
-colorscheme phoenix
+colorscheme blue
 " }}}
 
 " Variables {{{
@@ -228,83 +241,3 @@ let g:indentLine_char = '┊'
 let g:JavaComplete_ClosingBrace = 1
 autocmd FileType java setlocal omnifunc=javacomplete#Complete
 " }}} 
-
-" autocmds/augroups {{{
-if !exists("autocommands_loaded")
-	let autocommands_loaded = 1
-        autocmd BufReadPost *           
-                \ if line("'\"") > 0 && line("'\"") <= line("$") |
-                \   exe "normal! g`\"" |
-                \ endif
-
-        autocmd BufWrite *.py :call DeleteTrailingWS()
-        autocmd BufWrite *.coffee :call DeleteTrailingWS()
-endif
-" }}}
-
-" Adjust colourscheme {{{
-hi! Folded              guifg=#1e90ff   guibg=#191919
-hi! Search              guifg=#000000   guibg=#05c50b   gui=bold
-hi! String              guifg=#40bdff                   gui=italic
-hi! Special             guifg=#1e90ff
-hi! Normal              guifg=#ffffff   guibg=#111111   gui=none
-hi! NonText             guifg=#111111
-hi! VertSplit           guifg=#666666   guibg=#111111
-hi! ColorColumn                         guibg=#191919
-hi! SignColumn                          guibg=#111111
-hi! Pmenu               guifg=#ffffff   guibg=#191919
-hi! PmenuSel            guifg=#000000   guibg=#1e90ff
-hi! PmenuSbar                           guibg=#111111
-hi! PmenuThumb                          guibg=#1e90ff
-hi! MatchParen          guifg=#000000   guibg=#05c50b   gui=bold
-hi! PreProc             guifg=#1e90ff
-hi! Repeat              guifg=#1e90ff
-hi! Comment             guifg=#777777
-hi! Keyword             guifg=#1e90ff
-hi! Operator            guifg=#1e90ff
-hi! Exception           guifg=#1e90ff
-hi! Statement           guifg=#ffffff
-hi! Identifier          guifg=#1e90ff
-hi! Conditional         guifg=#1e90ff
-
-" Plugin colouring adjustments
-hi! EasyMotionTarget    guifg=#1e90ff   guibg=#111111   gui=bold
-hi! ALEErrorSign        guifg=#ff1a1a   guibg=NONE
-hi! ALEWarningSign      guifg=#fcfc4b   guibg=NONE
-
-" JSON specific adjustments
-hi! jsonBraces          guifg=#1e90ff
-hi! jsonString          guifg=#1e90ff
-hi! jsonKeyword         guifg=#ffffff
-
-" C/C++ specific adjustments
-hi! cType               guifg=#1e90ff
-hi! cppType             guifg=#1e90ff
-hi! cppAccess           guifg=#1e90ff
-hi! cppStructure        guifg=#1e90ff
-
-" Python specific adjustments
-hi! pythonStatement     guifg=#1e90ff
-hi! pythonFunction                                      gui=bold
-
-" Java specific adjustments
-hi! javaParen           guifg=#1e90ff
-hi! javaClassDecl       guifg=#1e90ff
-hi! javaScopeDecl       guifg=#1e90ff
-
-" Bash specific adjustments
-hi! shRange             guifg=#ffffff
-hi! shFunctionTwo                                       gui=bold
-hi! shFunctionKey                                       gui=bold
-hi! shFunction                                          gui=bold
-
-" Vim specific adjustments
-hi! vimGroup            guifg=#1e90ff
-hi! vimHiGroup          guifg=#1e90ff
-
-" HTML specific adjustments
-hi! link htmlTagName    Type
-
-" JavaScript specific adjustments
-hi! link javaScriptStatement javaScriptOperator
-" }}}
