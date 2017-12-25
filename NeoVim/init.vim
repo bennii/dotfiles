@@ -16,24 +16,21 @@ set hidden                      " Allow buffers to be hidden after a modificatio
 set magic 					    " For regular expressions turn magic on
 set number                      " Enable line numbers
 set relativenumber              " Enable relative line numbers
-set nowrap
+set nowrap                      " Turning off line wraps, there is a toggle keybind for it in this vimrc
 set autoread 				    " Set to auto read when a file is changed from the outside
-set lazyredraw
+set lazyredraw                  " Do not redraw when executing macros. Performance boosts.
 set termguicolors               " Enable GUI colors in Terminal. Requires terminal with true colors enabled
 set autoindent                  " Enable auto indentation
-set smartindent                 " Indent smart
-set smarttab
-set incsearch  				    " Makes search act like search in modern browsers
+set incsearch  				    " Makes search act like search in modern browsers, searching while typing. Reduces performance.
 set ignorecase                  " Ignore case matching during search (has to be on for smartcase)
 set smartcase                   " But if there is a search with upper case, search for upper cases
-set mat=1 					    " How many tenths of a second to blink when matching brackets
 set showmatch 				    " Show matching brackets when text indicator is over them
 set noshowmode 				    " Hide default mode indicator
 set noerrorbells 			    " No annoying sound on errors
 set novisualbell                " Disable visual effects on errors
-set nowb                        " Do not use backups before writing a file. Saves my SSD lifetime
 set nobackup                    " Do not make a backup before overwriting a file
 set noswapfile                  " Do not use a swap file. Save some of my SSD life
+set nowritebackup               " Do not use backups before writing a file. Saves my SSD lifetime. I save a file every change anyway.
 set smarttab                    " Be smart when using tabs
 set expandtab                   " Use spaces instead of tabs
 set tabstop=4                   " 1 tab = 4 spaces
@@ -43,7 +40,7 @@ set wildignore=*.o,*~,*.pyc     " Ignore compiled files
 set signcolumn=yes              " Always show signcolumn
 set spelllang=de_de             " I am german
 set colorcolumn=0               " Disable colorcolumn
-set ffs=unix,dos,mac            " Use Unix as the standard file type
+set fileformats=unix,dos,mac    " Use Unix as the standard file type
 set whichwrap+=<,>,h,l          " Additional keys to move between lines
 set fillchars=vert:\│           " Better looking UTF characters
 set foldmethod=marker           " Use {{{,}}} to define folding areas
@@ -62,33 +59,26 @@ let mapleader=","
 " }}}
 
 " Mappings {{{
-map j gj
-map k gk
-map Q <Nop>
-map <M-right> :bn<Enter>
-map <M-left> :bp<Enter>
-map <M-n>bn :new<Enter>
-map <M-c>bd :Bclose<Enter>
-map <M-a>ba :1,1000 bd!<Enter>
-map <leader>ss :setlocal spell!<Enter>
+nnoremap j gj
+nnoremap k gk
+nnoremap Q <Nop>
+nnoremap <M-right> :bn<Enter>
+nnoremap <M-left> :bp<Enter>
+nnoremap <M-n>bn :new<Enter>
+nnoremap <M-c>bd :Bclose<Enter>
+nnoremap <M-a>ba :1,1000 bd!<Enter>
+nnoremap <leader>ss :setlocal spell!<Enter>
 
-"map <M-n> :tabnew<Enter>
-"map <M-o> :tabonly<Enter>
-"map <M-c> :tabclose<Enter>
-"map <M-right> :tabnext<Enter>
-"map <M-left> :tabprevious<Enter>
-"map <M-e> :tabedit <c-r>=expand("%:p:h")<Enter>
-
-noremap ds{ F{xf}x
-noremap cs{ F{xf}xi
-noremap ds" F"x,x
-noremap cs" F"x,xi
-noremap ds' F'x,x
-noremap cs' F'x,xi
-noremap ds( F(xf)x
-noremap cs( F(xf)xi
-noremap ds) F(xf)x
-noremap cs) F(xf)xi
+nnoremap ds{ F{xf}x
+nnoremap cs{ F{xf}xi
+nnoremap ds" F"x,x
+nnoremap cs" F"x,xi
+nnoremap ds' F'x,x
+nnoremap cs' F'x,xi
+nnoremap ds( F(xf)x
+nnoremap cs( F(xf)xi
+nnoremap ds) F(xf)x
+nnoremap cs) F(xf)xi
 nnoremap <space> /
 nnoremap j jzz
 nnoremap k kzz
@@ -113,7 +103,6 @@ nnoremap <leader>cl :set cursorline! cursorline?<Enter>
 nnoremap <C-m>m :make<Enter>
 nnoremap <C-m>c :make clean<Enter>
 nnoremap <C-n> :NERDTreeToggle<Enter>
-nnoremap <C-i> :IndentLinesToggle<Enter>
 nnoremap <Leader><Enter> :nohl<Enter>
 nnoremap <F8> :TagbarToggle<Enter>
 nnoremap <F12> :vnew $MYVIMRC<Enter>
@@ -171,7 +160,6 @@ endfunction
 call plug#begin('~/.config/nvim/plug')
 " Eye candy
 Plug 'mhinz/vim-startify'
-Plug 'Yggdroot/indentLine'
 Plug 'ryanoasis/vim-devicons'
 Plug 'itchyny/lightline.vim'
 
@@ -234,10 +222,11 @@ let g:lightline = {
       \ 'subseparator': { 'left': '', 'right': '' }
       \ }
 
-" indentLine settings
-let g:indentLine_char = '┊'
+" YouCompleteMe
+ let g:ycm_global_ycm_extra_conf = '/home/benjamin/.config/nvim/ycm_extra_conf.py'
 
 " javacomplete2 settings 
 let g:JavaComplete_ClosingBrace = 1
+
 autocmd FileType java setlocal omnifunc=javacomplete#Complete
 " }}} 
