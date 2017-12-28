@@ -8,7 +8,14 @@ if !exists("autocommands_loaded")
 
         autocmd BufWrite *.py :call DeleteTrailingWS()
         autocmd BufWrite *.coffee :call DeleteTrailingWS()
+
+        " File specific settings
+        autocmd filetype markdown setlocal wrap
+        autocmd filetype java nnoremap <buffer> <F6> :!./run<Enter>
+        "autocmd filetype java set makeprg=./gradlew\ build
 endif
+" setlocal has to be here in order to trigger for a new buffer
+autocmd filetype java setlocal smartindent
 " }}}
 
 " Settings {{{
