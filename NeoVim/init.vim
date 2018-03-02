@@ -9,10 +9,11 @@ if !exists("autocommands_loaded")
         autocmd BufWrite *.py :call DeleteTrailingWS()
         autocmd BufWrite *.coffee :call DeleteTrailingWS()
 
-        " File specific settings
+        " File specific settings (this really should not be here)
         autocmd filetype markdown setlocal wrap
-        autocmd filetype java nnoremap <buffer> <F6> :!./run<Enter>
-        "autocmd filetype java set makeprg=./gradlew\ build
+        autocmd filetype java nnoremap <buffer> <F9> :!./run<Enter>
+        autocmd filetype python nnoremap <buffer> <F9> :!python %<Enter>
+        autocmd filetype tex nnoremap <buffer> <F9> :VimtexCompile<Enter>
 endif
 " setlocal has to be here in order to trigger for a new buffer
 autocmd filetype java setlocal smartindent
@@ -188,6 +189,9 @@ Plug 'easymotion/vim-easymotion'
 " CVS tools
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
+
+" Latex
+Plug 'lervag/vimtex'
 
 " Syntax files
 Plug 'wavded/vim-stylus'
