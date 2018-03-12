@@ -1,3 +1,82 @@
+" Plugins {{{
+call plug#begin('~/.config/nvim/plug')
+" Eye candy
+Plug 'mhinz/vim-startify'
+Plug 'ryanoasis/vim-devicons'
+Plug 'itchyny/lightline.vim'
+
+" Colorschemes
+Plug 'sjl/badwolf'
+Plug 'morhetz/gruvbox'
+Plug 'jacoborus/tender.vim'
+
+" File management
+Plug 'kien/ctrlp.vim'
+Plug 'vim-scripts/a.vim'
+Plug 'scrooloose/nerdtree'
+
+" Text and code helper
+Plug 'majutsushi/tagbar'
+Plug 'tpope/vim-commentary'
+Plug 'easymotion/vim-easymotion'
+
+" CVS tools
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+
+" Latex
+Plug 'lervag/vimtex'
+
+" Syntax files
+Plug 'wavded/vim-stylus'
+Plug 'digitaltoad/vim-pug'
+Plug 'jelera/vim-javascript-syntax'
+
+" Autocompletion 
+Plug 'artur-shaik/vim-javacomplete2'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'zchee/deoplete-jedi'
+call plug#end()
+" }}}
+
+" Plugin settings {{{
+" deoplete settings
+let g:deoplete#enable_at_startup = 1
+
+" vimtex settings
+let g:vimtex_mappings_enabled = 0
+
+" Tagbar settings
+let g:tagbar_sort = 1
+let g:tagbar_indent = 2
+let g:tagbar_show_visibility = 1
+let g:tagbar_show_linenumbers = 0
+
+" vim-lightline settings
+let g:lightline = {
+      \ 'colorscheme': 'tender',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component': {
+      \   'readonly': '%{&filetype=="help"?"":&readonly?"":""}',
+      \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
+      \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
+      \ },
+      \ 'component_visible_condition': {
+      \   'readonly': '(&filetype!="help"&& &readonly)',
+      \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
+      \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
+      \ },
+      \ 'separator': { 'left': '', 'right': '' },
+      \ 'subseparator': { 'left': '', 'right': '' }
+      \ }
+
+" javacomplete2 settings 
+let g:JavaComplete_ClosingBrace = 1
+" }}} 
+
 " autocmds/augroups {{{
 if !exists("autocommands_loaded")
 	let autocommands_loaded = 1
@@ -10,13 +89,14 @@ if !exists("autocommands_loaded")
         autocmd BufWrite *.coffee :call DeleteTrailingWS()
 
         " File specific settings (this really should not be here)
-        autocmd filetype markdown setlocal wrap
-        autocmd filetype java nnoremap <buffer> <F9> :!./run<Enter>
-        autocmd filetype python nnoremap <buffer> <F9> :!python %<Enter>
         autocmd filetype tex nnoremap <buffer> <F9> :VimtexCompile<Enter>
+        autocmd filetype java nnoremap <buffer> <F9> :!./run<Enter>
+        autocmd filetype java setlocal smartindent
+        autocmd FileType java setlocal omnifunc=javacomplete#Complete
+        autocmd filetype markdown setlocal wrap
+        autocmd filetype python nnoremap <buffer> <F9> :!python %<Enter>
 endif
 " setlocal has to be here in order to trigger for a new buffer
-autocmd filetype java setlocal smartindent
 " }}}
 
 " Settings {{{
@@ -163,81 +243,3 @@ function! VisualSelection(direction) range
     let @" = l:saved_reg
 endfunction
 " }}}
-
-" Plugins {{{
-call plug#begin('~/.config/nvim/plug')
-" Eye candy
-Plug 'mhinz/vim-startify'
-Plug 'ryanoasis/vim-devicons'
-Plug 'itchyny/lightline.vim'
-
-" Colorschemes
-Plug 'sjl/badwolf'
-Plug 'morhetz/gruvbox'
-Plug 'jacoborus/tender.vim'
-
-" File management
-Plug 'kien/ctrlp.vim'
-Plug 'vim-scripts/a.vim'
-Plug 'scrooloose/nerdtree'
-
-" Text and code helper
-Plug 'majutsushi/tagbar'
-Plug 'tpope/vim-commentary'
-Plug 'easymotion/vim-easymotion'
-
-" CVS tools
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
-
-" Latex
-Plug 'lervag/vimtex'
-
-" Syntax files
-Plug 'wavded/vim-stylus'
-Plug 'digitaltoad/vim-pug'
-Plug 'jelera/vim-javascript-syntax'
-
-" Autocompletion 
-Plug 'Valloric/YouCompleteMe'
-Plug 'artur-shaik/vim-javacomplete2'
-call plug#end()
-" }}}
-
-" Plugin settings {{{
-
-" Tagbar settings
-let g:tagbar_sort = 1
-let g:tagbar_indent = 2
-let g:tagbar_show_visibility = 1
-let g:tagbar_show_linenumbers = 0
-
-" vim-lightline settings
-let g:lightline = {
-      \ 'colorscheme': 'tender',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
-      \ },
-      \ 'component': {
-      \   'readonly': '%{&filetype=="help"?"":&readonly?"":""}',
-      \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
-      \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
-      \ },
-      \ 'component_visible_condition': {
-      \   'readonly': '(&filetype!="help"&& &readonly)',
-      \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
-      \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
-      \ },
-      \ 'separator': { 'left': '', 'right': '' },
-      \ 'subseparator': { 'left': '', 'right': '' }
-      \ }
-
-" YouCompleteMe
- let g:ycm_global_ycm_extra_conf = '/home/benjamin/.config/nvim/ycm_extra_conf.py'
-
-" javacomplete2 settings 
-let g:JavaComplete_ClosingBrace = 1
-
-autocmd FileType java setlocal omnifunc=javacomplete#Complete
-" }}} 
