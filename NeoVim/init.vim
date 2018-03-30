@@ -36,6 +36,8 @@ Plug 'jelera/vim-javascript-syntax'
 Plug 'artur-shaik/vim-javacomplete2'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-jedi'
+Plug 'tweekmonster/deoplete-clang2'
+Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 call plug#end()
 " }}}
 

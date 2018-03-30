@@ -48,8 +48,8 @@ hi ErrorMsg                     guifg=#FF3D23 guibg=NONE    gui=BOLD
 hi MoreMsg                      guifg=#87bf19 guibg=NONE    gui=NONE      
 hi WarningMsg                   guifg=#DEDD5A guibg=NONE    gui=NONE      
 hi ColorColumn                  guifg=NONE    guibg=#191919 gui=BOLD      
-hi Pmenu                        guifg=#ffffff guibg=#191919 gui=NONE      
-hi PmenuSel                     guifg=#000000 guibg=#ffffff gui=BOLD
+hi Pmenu                        guifg=#ffffff guibg=#010101 gui=NONE      
+hi PmenuSel                     guifg=#1e90ff guibg=#000000 gui=BOLD
 hi PmenuSbar                    guifg=#111111 guibg=#111111 gui=NONE
 hi PmenuThumb                   guifg=#1e90ff guibg=#1e90ff gui=NONE      
 hi StatusLine                   guifg=#cccccc guibg=NONE    gui=NONE      
