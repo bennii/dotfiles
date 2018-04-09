@@ -35,8 +35,9 @@ Plug 'jelera/vim-javascript-syntax'
 " Autocompletion 
 Plug 'artur-shaik/vim-javacomplete2'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'zchee/deoplete-jedi'
-Plug 'tweekmonster/deoplete-clang2'
+Plug 'Shougo/neoinclude.vim'
+Plug 'Shougo/deoplete-clangx'
+Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'}
 Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 call plug#end()
 " }}}
@@ -44,6 +45,8 @@ call plug#end()
 " Plugin settings {{{
 " deoplete settings
 let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_refresh_always = 1
+let g:deoplete#auto_refresh_delay = 0
 
 " vimtex settings
 let g:vimtex_mappings_enabled = 0
@@ -53,6 +56,13 @@ let g:tagbar_sort = 1
 let g:tagbar_indent = 2
 let g:tagbar_show_visibility = 1
 let g:tagbar_show_linenumbers = 0
+
+" LanguageClient settings
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
+    \ 'javascript': ['javascript-typescript-stdio'],
+    \ 'javascript.jsx': ['javascript-typescript-stdio'],
+    \ 'python': 'pyls' }
 
 " vim-lightline settings
 let g:lightline = {
