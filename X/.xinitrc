@@ -31,11 +31,11 @@ fi
 #compton -b
 #sh Scripts/rwall.sh
 
+#xset s off -dpms
 mpd
 redshift &
 setxkbmap de
-xset s off -dpms
 pulseaudio --start
-hsetroot -fill Bilder/Wallpaper/gIJ.jpg
+nitrogen --restore
 
 exec i3
