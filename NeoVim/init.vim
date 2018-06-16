@@ -3,12 +3,10 @@ call plug#begin('~/.config/nvim/plug')
 " Eye candy
 Plug 'mhinz/vim-startify'
 Plug 'ryanoasis/vim-devicons'
-Plug 'itchyny/lightline.vim'
+Plug 'vim-airline/vim-airline'
 
 " Colorschemes
-Plug 'sjl/badwolf'
 Plug 'morhetz/gruvbox'
-Plug 'jacoborus/tender.vim'
 
 " File management
 Plug 'kien/ctrlp.vim'
@@ -32,26 +30,28 @@ Plug 'wavded/vim-stylus'
 Plug 'digitaltoad/vim-pug'
 Plug 'jelera/vim-javascript-syntax'
 
-" Autocompletion 
+" Autocompletion and linting
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'artur-shaik/vim-javacomplete2'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neoinclude.vim'
+Plug 'zchee/deoplete-go', { 'do': 'make'}
 Plug 'Shougo/deoplete-clangx'
-Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'}
 Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'}
 call plug#end()
 " }}}
 
 " Plugin settings {{{
 " deoplete settings
 let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_refresh_always = 1
-let g:deoplete#auto_refresh_delay = 0
+let g:deoplete#auto_refresh_delay = 10
+let g:deoplete#auto_complete_start_length = 1
 
 " vimtex settings
 let g:vimtex_mappings_enabled = 0
 
-" Tagbar settings
+" tagbar settings
 let g:tagbar_sort = 1
 let g:tagbar_indent = 2
 let g:tagbar_show_visibility = 1
@@ -59,54 +59,62 @@ let g:tagbar_show_linenumbers = 0
 
 " LanguageClient settings
 let g:LanguageClient_serverCommands = {
-    \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
-    \ 'javascript': ['javascript-typescript-stdio'],
-    \ 'javascript.jsx': ['javascript-typescript-stdio'],
-    \ 'python': 'pyls' }
+            \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
+            \ 'javascript': ['javascript-typescript-stdio'],
+            \ 'javascript.jsx': ['javascript-typescript-stdio'],
+            \ 'python': ['pyls'] }
 
-" vim-lightline settings
-let g:lightline = {
-      \ 'colorscheme': 'tender',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
-      \ },
-      \ 'component': {
-      \   'readonly': '%{&filetype=="help"?"":&readonly?"":""}',
-      \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
-      \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
-      \ },
-      \ 'component_visible_condition': {
-      \   'readonly': '(&filetype!="help"&& &readonly)',
-      \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
-      \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
-      \ },
-      \ 'separator': { 'left': '', 'right': '' },
-      \ 'subseparator': { 'left': '', 'right': '' }
-      \ }
+" vim-airline settings
+let g:airline_theme='gruvbox'
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'default'
 
-" javacomplete2 settings 
+" javacomplete2 settings
 let g:JavaComplete_ClosingBrace = 1
-" }}} 
+
+" vim-go settings
+" }}}
 
 " autocmds/augroups {{{
 if !exists("autocommands_loaded")
-	let autocommands_loaded = 1
-        autocmd BufReadPost *           
+    let autocommands_loaded = 1
+    autocmd BufReadPost *
                 \ if line("'\"") > 0 && line("'\"") <= line("$") |
                 \   exe "normal! g`\"" |
                 \ endif
 
-        autocmd BufWrite *.py :call DeleteTrailingWS()
-        autocmd BufWrite *.coffee :call DeleteTrailingWS()
-
-        " File specific settings (this really should not be here)
+    augroup LatexFeatures
+        autocmd!
         autocmd filetype tex nnoremap <buffer> <F9> :VimtexCompile<Enter>
+    augroup END
+
+    augroup JavaFeatures
+        autocmd!
         autocmd filetype java nnoremap <buffer> <F9> :!./run<Enter>
         autocmd filetype java setlocal smartindent
         autocmd FileType java setlocal omnifunc=javacomplete#Complete
+    augroup END
+
+    augroup MarkdownFeatures
+        autocmd!
         autocmd filetype markdown setlocal wrap
+    augroup END
+
+    augroup PythonFeatures
+        autocmd!
+        autocmd BufWrite *.py :call DeleteTrailingWS()
         autocmd filetype python nnoremap <buffer> <F9> :!python %<Enter>
+    augroup END
+
+    augroup JavascriptFeatures
+        autocmd!
+        autocmd filetype javascript nnoremap <buffer> <F9> :!node %<Enter>
+    augroup END
+
+    augroup GolangFeatures
+        autocmd!
+        autocmd filetype go nnoremap <buffer> <F9> :GoRun %<Enter>
 endif
 " setlocal has to be here in order to trigger for a new buffer
 " }}}
@@ -137,6 +145,7 @@ set tabstop=4                   " 1 tab = 4 spaces
 set shiftwidth=4                " 1 tab == 4 spaces
 set wildmenu 				    " Turn on the wild menu
 set wildignore=*.o,*~,*.pyc     " Ignore compiled files
+set background=dark             " Load the dark background of colorschemes
 set signcolumn=yes              " Always show signcolumn
 set spelllang=de_de             " I am german
 set colorcolumn=0               " Disable colorcolumn
@@ -151,7 +160,7 @@ set backspace=eol,start,indent  " Configure backspace so it acts as it should ac
 syntax enable
 filetype plugin on
 filetype indent on
-colorscheme blue
+colorscheme gruvbox
 " }}}
 
 " Variables {{{
@@ -207,8 +216,8 @@ nnoremap <Leader><Enter> :nohl<Enter>
 nnoremap <F8> :TagbarToggle<Enter>
 nnoremap <F12> :vnew $MYVIMRC<Enter>
 nnoremap <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
-\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
-\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+            \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+            \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 vnoremap <up> <Nop>
 vnoremap <down> <Nop>
@@ -246,7 +255,7 @@ function! VisualSelection(direction) range
     elseif a:direction == 'gv'
         call CmdLine("vimgrep " . '/'. l:pattern . '/' . ' **/*.')
     elseif a:direction == 'replace'
-       call CmdLine("%s" . '/'. l:pattern . '/')
+        call CmdLine("%s" . '/'. l:pattern . '/')
     elseif a:direction == 'f'
         execute "normal /" . l:pattern . "^M"
     endif
