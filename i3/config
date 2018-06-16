@@ -1,7 +1,10 @@
 set $mod Mod1
+#set $Launcher dmenu_run
+set $Launcher rofi -show run
 set $Locker i3lock-fancy
-set $Terminal st -f "Ubuntu Mono:pixelsize=20:style=Regular"
+#set $Terminal st -f "Iosevka:pixelsize=20:style=Regular"
 #set $Terminal st -f "Roboto Mono for Powerline:pixelsize=14:style=light"
+set $Terminal kitty
 set $Browser google-chrome-stable
 set $ws1 1:    
 set $ws2 2:    
@@ -12,7 +15,7 @@ set $ws6 6:  
 set $ws7 7:    
 set $ws8 8:    
 set $ws9 9:    
-set $ws0 10:    
+set $ws0 10:   
 
 
 # Use Mouse+#mod to drag floating windows to their wanted position
@@ -30,7 +33,7 @@ bindsym $mod+b exec $Browser
 bindsym $mod+e exec $Terminal nvim
 bindsym $mod+z exec zathura
 bindsym $mod+w exec $Terminal weechat
-bindsym $mod+d exec dmenu_run
+bindsym $mod+d exec $Launcher
 #bindsym $mod+d exec rofi -show run -lines 7 -width 33 -padding 30 -bw 0
 bindsym $mod+m exec $Terminal mc
 bindsym $mod+Return exec $Terminal -e /usr/bin/fish
@@ -161,22 +164,22 @@ mode "$mode_shutdown" {
 bar {
     position top
     separator_symbol "  "
-    font pango: Knack Nerd Font 12
+    font pango: Iosevka 14
     strip_workspace_numbers yes
     status_command py3status -c /home/benjamin/.config/i3/i3status.conf -n 10 -i /home/benjamin/.config/i3/py3status/modules
 
     colors {
-        background 	#111111
-        separator   #FFFFFF
-        statusline  #1E90FF 
+        background 	#282828
+        separator   #458588
+        statusline  #458588
 
-        urgent_workspace    #1E90FF #1E90FF  #FFFFFF
-        focused_workspace   #1E90FF #1E90FF  #FFFFFF
-        inactive_workspace  #111111 #111111  #888888
+        urgent_workspace    #458588 #458588  #ffffff
+        focused_workspace   #458588 #458588  #ffffff
+        inactive_workspace  #282828 #282828  #888888
     }
 }
 
-gaps outer 10
+gaps outer 15
 gaps inner 25
 smart_borders no_gaps
 
@@ -184,6 +187,6 @@ for_window [class="^.*"] border pixel 2
 for_window [class="^Steam$"] floating enable
 for_window [title="Java Client"] floating enable
 
-client.focused              #FFFFFF #1E90FF #FFFFFF #0000FF
-client.unfocused            #FFFFFF #111111 #FFFFFF #0000FF
-client.focused_inactive     #FFFFFF #111111 #FFFFFF #0000FF
+client.focused              #FFFFFF #458588 #FFFFFF #458588
+client.unfocused            #FFFFFF #111111 #FFFFFF #458588
+client.focused_inactive     #FFFFFF #111111 #FFFFFF #458588
