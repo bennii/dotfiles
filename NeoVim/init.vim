@@ -9,14 +9,13 @@ Plug 'vim-airline/vim-airline'
 Plug 'morhetz/gruvbox'
 
 " File management
-Plug 'kien/ctrlp.vim'
+Plug 'kien/ctrlp.vim'       " replace with fzf?
 Plug 'vim-scripts/a.vim'
 Plug 'scrooloose/nerdtree'
 
 " Text and code helper
 Plug 'majutsushi/tagbar'
 Plug 'tpope/vim-commentary'
-Plug 'easymotion/vim-easymotion'
 
 " CVS tools
 Plug 'tpope/vim-fugitive'
@@ -115,6 +114,12 @@ if !exists("autocommands_loaded")
     augroup GolangFeatures
         autocmd!
         autocmd filetype go nnoremap <buffer> <F9> :GoRun %<Enter>
+        autocmd filetype go nnoremap <buffer> <F10> :GoBuild!<Enter>
+        autocmd filetype go nnoremap <buffer> <C-g>i :GoImport
+        autocmd filetype go nnoremap <buffer> <C-g>d :GoDrop
+        autocmd filetype go nnoremap <buffer> <C-g>g :GoDef<Enter>
+        autocmd filetype go nnoremap <buffer> <C-g>s :GoInfo<Enter>
+        autocmd filetype go nnoremap <buffer> <C-g>r :GoRename!<Enter>
 endif
 " setlocal has to be here in order to trigger for a new buffer
 " }}}
@@ -146,7 +151,7 @@ set shiftwidth=4                " 1 tab == 4 spaces
 set wildmenu 				    " Turn on the wild menu
 set wildignore=*.o,*~,*.pyc     " Ignore compiled files
 set background=dark             " Load the dark background of colorschemes
-set signcolumn=yes              " Always show signcolumn
+set signcolumn=no               " Always show signcolumn
 set spelllang=de_de             " I am german
 set colorcolumn=0               " Disable colorcolumn
 set fileformats=unix,dos,mac    " Use Unix as the standard file type
@@ -168,16 +173,8 @@ let mapleader=","
 " }}}
 
 " Mappings {{{
-nnoremap j gj
-nnoremap k gk
-nnoremap Q <Nop>
-nnoremap <M-right> :bn<Enter>
-nnoremap <M-left> :bp<Enter>
-nnoremap <M-n>bn :new<Enter>
-nnoremap <M-c>bd :Bclose<Enter>
-nnoremap <M-a>ba :1,1000 bd!<Enter>
-nnoremap <leader>ss :setlocal spell!<Enter>
-
+nnoremap j gjzz
+nnoremap k gkzz
 nnoremap ds{ F{xf}x
 nnoremap cs{ F{xf}xi
 nnoremap ds" F"x,x
@@ -189,8 +186,13 @@ nnoremap cs( F(xf)xi
 nnoremap ds) F(xf)x
 nnoremap cs) F(xf)xi
 nnoremap <space> /
-nnoremap j jzz
-nnoremap k kzz
+nnoremap Q <Nop>
+nnoremap <M-right> :bn<Enter>
+nnoremap <M-left> :bp<Enter>
+nnoremap <M-n>bn :new<Enter>
+nnoremap <M-c>bd :Bclose<Enter>
+nnoremap <M-a>ba :1,1000 bd!<Enter>
+nnoremap <leader>ss :setlocal spell!<Enter>
 nnoremap <c-space> ?
 nnoremap <down> ddp
 nnoremap <up> ddkP
@@ -215,7 +217,7 @@ nnoremap <C-n> :NERDTreeToggle<Enter>
 nnoremap <Leader><Enter> :nohl<Enter>
 nnoremap <F8> :TagbarToggle<Enter>
 nnoremap <F12> :vnew $MYVIMRC<Enter>
-nnoremap <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+nnoremap <F11> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
             \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
             \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
@@ -226,6 +228,13 @@ vnoremap <right> <Nop>
 vnoremap <silent> * :call VisualSelection('f')<Enter>
 vnoremap <silent> # :call VisualSelection('b')<Enter>
 vnoremap <silent> <leader>r :call VisualSelection('replace')<Enter>
+
+" These bindinds need perfection. Mabye use a leader key option
+" because there are moments in which you do not want to autocomplete
+" the braces (e.g parameter less function)
+inoremap ( (x)<ESC>Fxvc
+inoremap [ [x]<ESC>Fxvc
+inoremap { {x}<ESC>Fxvc
 
 tnoremap <Esc> <C-\><C-n>
 "}}}
