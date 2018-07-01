@@ -15,8 +15,7 @@ set $ws6 6:  
 set $ws7 7:    
 set $ws8 8:    
 set $ws9 9:    
-set $ws0 10:   
-
+set $ws0 10:    
 
 # Use Mouse+#mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -161,23 +160,23 @@ mode "$mode_shutdown" {
 }
 
 
-bar {
-    position top
-    separator_symbol "  "
-    font pango: Iosevka 14
-    strip_workspace_numbers yes
-    status_command py3status -c /home/benjamin/.config/i3/i3status.conf -n 10 -i /home/benjamin/.config/i3/py3status/modules
+# bar {
+#     position top
+#     separator_symbol "  "
+#     font pango: Iosevka 14
+#     strip_workspace_numbers yes
+#     status_command py3status -c /home/benjamin/.config/i3/i3status.conf -n 10 -i /home/benjamin/.config/i3/py3status/modules
 
-    colors {
-        background 	#282828
-        separator   #458588
-        statusline  #458588
+#     colors {
+#         background 	#282828
+#         separator   #458588
+#         statusline  #458588
 
-        urgent_workspace    #458588 #458588  #ffffff
-        focused_workspace   #458588 #458588  #ffffff
-        inactive_workspace  #282828 #282828  #888888
-    }
-}
+#         urgent_workspace    #458588 #458588  #ffffff
+#         focused_workspace   #458588 #458588  #ffffff
+#         inactive_workspace  #282828 #282828  #888888
+#     }
+# }
 
 gaps outer 15
 gaps inner 25
