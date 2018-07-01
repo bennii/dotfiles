@@ -4,6 +4,7 @@ call plug#begin('~/.config/nvim/plug')
 Plug 'mhinz/vim-startify'
 Plug 'ryanoasis/vim-devicons'
 Plug 'vim-airline/vim-airline'
+Plug 'junegunn/goyo.vim'
 
 " Colorschemes
 Plug 'morhetz/gruvbox'
@@ -27,7 +28,6 @@ Plug 'lervag/vimtex'
 " Syntax files
 Plug 'wavded/vim-stylus'
 Plug 'digitaltoad/vim-pug'
-Plug 'jelera/vim-javascript-syntax'
 
 " Autocompletion and linting
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
