@@ -26,18 +26,18 @@ Plug 'airblade/vim-gitgutter'
 Plug 'lervag/vimtex'
 
 " Syntax files
-Plug 'wavded/vim-stylus'
-Plug 'digitaltoad/vim-pug'
+Plug 'leafgarland/typescript-vim'
 
 " Autocompletion and linting
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'fatih/vim-go'
 Plug 'artur-shaik/vim-javacomplete2'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neoinclude.vim'
 Plug 'zchee/deoplete-go', { 'do': 'make'}
 Plug 'Shougo/deoplete-clangx'
-Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+Plug 'Quramy/tsuquyomi'
 Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'}
+
 call plug#end()
 " }}}
 
@@ -71,6 +71,9 @@ let g:airline#extensions#tabline#formatter = 'default'
 
 " javacomplete2 settings
 let g:JavaComplete_ClosingBrace = 1
+
+" tsuquyomi settings
+let g:tsuquyomi_completion_detail = 1
 
 " vim-go settings
 " }}}
