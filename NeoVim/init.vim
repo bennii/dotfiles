@@ -11,7 +11,7 @@ Plug 'morhetz/gruvbox'
 
 " File management
 Plug 'kien/ctrlp.vim'       " replace with fzf?
-Plug 'vim-scripts/a.vim'
+Plug 'vim-scripts/a.vim'    " Change from .h to .c(pp)
 Plug 'scrooloose/nerdtree'
 
 " Text and code helper
@@ -26,16 +26,14 @@ Plug 'airblade/vim-gitgutter'
 Plug 'lervag/vimtex'
 
 " Syntax files
-Plug 'leafgarland/typescript-vim'
 
 " Autocompletion and linting
 Plug 'fatih/vim-go'
+Plug 'Shougo/neoinclude.vim'
 Plug 'artur-shaik/vim-javacomplete2'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'Shougo/neoinclude.vim'
 Plug 'zchee/deoplete-go', { 'do': 'make'}
 Plug 'Shougo/deoplete-clangx'
-Plug 'Quramy/tsuquyomi'
 Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'}
 
 call plug#end()
@@ -71,9 +69,6 @@ let g:airline#extensions#tabline#formatter = 'default'
 
 " javacomplete2 settings
 let g:JavaComplete_ClosingBrace = 1
-
-" tsuquyomi settings
-let g:tsuquyomi_completion_detail = 1
 
 " vim-go settings
 " }}}
