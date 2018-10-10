@@ -8,6 +8,7 @@ Plug 'junegunn/goyo.vim'
 
 " Colorschemes
 Plug 'morhetz/gruvbox'
+Plug 'NLKNguyen/papercolor-theme'
 
 " File management
 Plug 'kien/ctrlp.vim'       " replace with fzf?
