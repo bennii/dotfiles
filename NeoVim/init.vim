@@ -8,6 +8,7 @@ Plug 'junegunn/goyo.vim'
 
 " Colorschemes
 Plug 'morhetz/gruvbox'
+Plug 'kaicataldo/material.vim'
 Plug 'NLKNguyen/papercolor-theme'
 
 " File management
@@ -16,8 +17,10 @@ Plug 'vim-scripts/a.vim'    " Change from .h to .c(pp)
 Plug 'scrooloose/nerdtree'
 
 " Text and code helper
+Plug 'w0rp/ale'
 Plug 'majutsushi/tagbar'
 Plug 'tpope/vim-commentary'
+Plug 'editorconfig/editorconfig-vim'
 
 " CVS tools
 Plug 'tpope/vim-fugitive'
@@ -27,11 +30,13 @@ Plug 'airblade/vim-gitgutter'
 Plug 'lervag/vimtex'
 
 " Syntax files
+Plug 'HerringtonDarkholme/yats.vim'
 
 " Autocompletion and linting
 Plug 'fatih/vim-go'
 Plug 'Shougo/neoinclude.vim'
 Plug 'artur-shaik/vim-javacomplete2'
+Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-go', { 'do': 'make'}
 Plug 'Shougo/deoplete-clangx'
@@ -45,6 +50,14 @@ call plug#end()
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#auto_refresh_delay = 10
 let g:deoplete#auto_complete_start_length = 1
+
+" ALE settings
+let g:ale_sign_column_always = 1
+let g:airline#extensions#ale#enabled = 1
+
+" material color theme settings
+let g:material_theme_style = 'dark'
+let g:material_terminal_italics = 1
 
 " vimtex settings
 let g:vimtex_mappings_enabled = 0
@@ -63,7 +76,7 @@ let g:LanguageClient_serverCommands = {
             \ 'python': ['pyls'] }
 
 " vim-airline settings
-let g:airline_theme='gruvbox'
+let g:airline_theme='material'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'default'
@@ -150,7 +163,7 @@ set shiftwidth=4                " 1 tab == 4 spaces
 set wildmenu 				    " Turn on the wild menu
 set wildignore=*.o,*~,*.pyc     " Ignore compiled files
 set background=dark             " Load the dark background of colorschemes
-set signcolumn=no               " Always show signcolumn
+set signcolumn=yes               " Always show signcolumn
 set spelllang=de_de             " I am german
 set colorcolumn=0               " Disable colorcolumn
 set fileformats=unix,dos,mac    " Use Unix as the standard file type
@@ -164,7 +177,7 @@ set backspace=eol,start,indent  " Configure backspace so it acts as it should ac
 syntax enable
 filetype plugin on
 filetype indent on
-colorscheme gruvbox
+colorscheme material
 " }}}
 
 " Variables {{{
