@@ -1,23 +1,11 @@
 " Plugins {{{
 call plug#begin('~/.config/nvim/plug')
-" Eye candy
-Plug 'mhinz/vim-startify'
-Plug 'ryanoasis/vim-devicons'
-Plug 'vim-airline/vim-airline'
-Plug 'junegunn/goyo.vim'
-
-" Colorschemes
-Plug 'morhetz/gruvbox'
-Plug 'kaicataldo/material.vim'
-Plug 'NLKNguyen/papercolor-theme'
 
 " File management
 Plug 'kien/ctrlp.vim'       " replace with fzf?
-Plug 'vim-scripts/a.vim'    " Change from .h to .c(pp)
 Plug 'scrooloose/nerdtree'
 
 " Text and code helper
-Plug 'w0rp/ale'
 Plug 'majutsushi/tagbar'
 Plug 'tpope/vim-commentary'
 Plug 'editorconfig/editorconfig-vim'
@@ -29,17 +17,9 @@ Plug 'airblade/vim-gitgutter'
 " Latex
 Plug 'lervag/vimtex'
 
-" Syntax files
-Plug 'HerringtonDarkholme/yats.vim'
-
 " Autocompletion and linting
 Plug 'fatih/vim-go'
-Plug 'Shougo/neoinclude.vim'
-Plug 'artur-shaik/vim-javacomplete2'
-Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'zchee/deoplete-go', { 'do': 'make'}
-Plug 'Shougo/deoplete-clangx'
 Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'}
 
 call plug#end()
@@ -48,16 +28,8 @@ call plug#end()
 " Plugin settings {{{
 " deoplete settings
 let g:deoplete#enable_at_startup = 1
-let g:deoplete#auto_refresh_delay = 10
-let g:deoplete#auto_complete_start_length = 1
-
-" ALE settings
-let g:ale_sign_column_always = 1
-let g:airline#extensions#ale#enabled = 1
-
-" material color theme settings
-let g:material_theme_style = 'dark'
-let g:material_terminal_italics = 1
+let g:deoplete#auto_refresh_delay = 5
+let g:deoplete#auto_complete_start_length = 10
 
 " vimtex settings
 let g:vimtex_mappings_enabled = 0
@@ -69,25 +41,11 @@ let g:tagbar_show_visibility = 1
 let g:tagbar_show_linenumbers = 0
 
 " LanguageClient settings
-let g:LanguageClient_serverCommands = {
-            \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
-            \ 'javascript': ['javascript-typescript-stdio'],
-            \ 'javascript.jsx': ['javascript-typescript-stdio'],
-            \ 'python': ['pyls'] }
-
-" vim-airline settings
-let g:airline_theme='material'
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#formatter = 'default'
-
-" javacomplete2 settings
-let g:JavaComplete_ClosingBrace = 1
-
-" vim-go settings
+let g:LanguageClient_serverCommands = {}
 " }}}
 
 " autocmds/augroups {{{
+
 if !exists("autocommands_loaded")
     let autocommands_loaded = 1
     autocmd BufReadPost *
@@ -177,7 +135,7 @@ set backspace=eol,start,indent  " Configure backspace so it acts as it should ac
 syntax enable
 filetype plugin on
 filetype indent on
-colorscheme material
+colorscheme blue
 " }}}
 
 " Variables {{{
