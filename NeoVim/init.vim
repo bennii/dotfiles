@@ -31,6 +31,7 @@ set laststatus=2
 set nobackup
 set noshowmode
 set noswapfile
+set nowrap
 set nowritebackup
 set number
 set path=$PWD/**
@@ -79,3 +80,5 @@ autocmd BufReadPost *
 \ if line("'\"") > 1 && line("'\"") <= line("$") |
 \   exe "normal! g`\"" |
 \ endif
+
+autocmd BufEnter * :normal zz
