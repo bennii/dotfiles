@@ -1,5 +1,8 @@
 call plug#begin('~/.config/nvim/plug')
 
+" Git related plugins
+Plug 'airblade/vim-gitgutter'
+
 " Code completion
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
@@ -57,6 +60,15 @@ let g:lightline = { 'colorscheme': 'gotham' }
 
 " vim-go
 let g:go_fmt_command = "goimports"
+
+" gitgutter
+let g:gitgutter_git_executable = '/bin/git'
+let g:gitgutter_sign_added = '❚'
+let g:gitgutter_sign_modified = '❚'
+let g:gitgutter_sign_removed = '❚'
+let g:gitguttef_sign_removed_first_line = '❚'
+let g:gitgutter_sign_modified_removed = '❚'
+
 
 " NERDTree
 let g:NERDTreeDirArrowExpandable = '▸'
