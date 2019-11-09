@@ -17,6 +17,8 @@ set $ws8 8:  
 set $ws9 9:    
 set $ws0 10:    
 
+font pango: Iosevka 12
+
 # Use Mouse+#mod to drag floating windows to their wanted position
 floating_modifier $mod
 
@@ -163,7 +165,6 @@ mode "$mode_shutdown" {
 bar {
     position top
     separator_symbol "  "
-    font pango: Iosevka 14
     strip_workspace_numbers yes
     status_command py3status -c /home/benjamin/.config/i3/i3status.conf -n 10 -i /home/benjamin/.config/i3/py3status/modules
 
