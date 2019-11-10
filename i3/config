@@ -37,7 +37,7 @@ bindsym $mod+w exec $Terminal weechat
 bindsym $mod+d exec $Launcher
 #bindsym $mod+d exec rofi -show run -lines 7 -width 33 -padding 30 -bw 0
 bindsym $mod+m exec $Terminal mc
-bindsym $mod+Return exec $Terminal -e /usr/bin/fish
+bindsym $mod+Return exec $Terminal -e /usr/bin/zsh
 bindsym $mod+Shift+q kill
 
 bindsym $mod+r mode "resize"
