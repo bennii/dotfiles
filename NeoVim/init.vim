@@ -14,7 +14,6 @@ Plug 'preservim/nerdcommenter'
 Plug 'sheerun/vim-polyglot'
 
 " Eye candy
-Plug 'whatyouhide/vim-gotham'
 Plug 'morhetz/gruvbox'
 Plug 'itchyny/lightline.vim'
 
@@ -87,6 +86,10 @@ else
 endif
 
 " Plugin settings
+
+" coc.nvim extensions
+let g:coc_global_extensions = ['coc-json', 'coc-tsserver', 'coc-angular', 'coc-go', 'coc-flutter', 'coc-rls', 'coc-python', 'coc-omnisharp']
+
 " lightline
 let g:lightline = { 'colorscheme': 'gruvbox' }
 
@@ -103,7 +106,7 @@ let g:NERDTreeWinSize=48
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
 
-" NEERDCommenter
+" NERDCommenter
 let g:NERDSpaceDelims=1
 let g:NERDTrimTrailingWhitespace=1
 let g:NERDToggleCheckAllLines=1
@@ -131,7 +134,10 @@ augroup END
 
 augroup FileTypeMakeprgSettings
     autocmd FileType c setlocal makeprg=make\ &&\ make\ run
-    autocmd FileType go setlocal makeprg=go\ build\ %\ &&\ go\ run\ %:r
+    autocmd FileType cs setlocal makeprg=dotnet\ run
+    autocmd FileType cpp setlocal makeprg=make\ &&\ make\ run
+    autocmd FileType go setlocal makeprg=go\ build\ %\ &&\ go\ run\ %
+    autocmd FileType rust setlocal makeprg=cargo\ run %
     autocmd FileType python setlocal makeprg=python\ %
 augroup END
 
