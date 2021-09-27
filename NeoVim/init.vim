@@ -2,6 +2,7 @@ call plug#begin('~/.config/nvim/plug')
 
 " Git related plugins
 Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
 
 " Code completion
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
