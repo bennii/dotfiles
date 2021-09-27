@@ -27,7 +27,6 @@ Plug 'sheerun/vim-polyglot'
 "Plug 'itchyny/lightline.vim'
 Plug 'joshdick/onedark.vim'
 Plug 'vim-airline/vim-airline'
-Plug 'Yggdroot/indentLine'
 Plug 'ryanoasis/vim-devicons'
 
 " Editor settings
